@@ -1,12 +1,8 @@
 #include <stdio.h>
-
 #define SIZE 5  
-
 int queue[SIZE];
 int front = -1;
 int rear = -1;
-
-
 int isFull() {
     return (front == (rear + 1) % SIZE);
 }
@@ -15,7 +11,6 @@ int isFull() {
 int isEmpty() {
     return front == -1;
 }
-
 
 void enqueue(int value) {
     if (isFull()) {
