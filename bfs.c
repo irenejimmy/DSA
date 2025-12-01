@@ -3,49 +3,41 @@
 
 int adj[MAXV][MAXV]; 
 int visited[MAXV];
-int queue_arr[MAXV];
-int front_idx, rear_idx;
+int queue[MAXV];
+int front, rear;
 int n; 
 
 void init_queue() {
-    front_idx = 0;
-    rear_idx = -1;
+    front = 0;
+    rear = -1;
 }
 
 void enqueue(int v) {
-    if (rear_idx < MAXV - 1) {
-        queue_arr[++rear_idx] = v;
+    if (rear < MAXV - 1) {
+        queue[++rear] = v;
     }
-   
 }
 
 int dequeue() {
-    if (front_idx <= rear_idx) {
-        return queue_arr[front_idx++];
+    if (front <= rear) {
+        return queue[front++];
     }
-    return -1; 
-}
-
-int is_queue_empty() {
-    return front_idx > rear_idx;
+    return -1;
 }
 
 void bfs(int start) {
     int u, v;
 
-    
     for (u = 0; u < n; u++) {
         visited[u] = 0;
     }
 
-    
     init_queue();
 
- 
     visited[start] = 1;
     enqueue(start);
 
-    while (!is_queue_empty()) {
+    while (front <= rear) {  // directly checking queue condition
         u = dequeue();
         printf("%d ", u);
 
@@ -72,7 +64,7 @@ int main() {
         }
     }
 
-    printf("Enter starting vertex (0 to %d): ", n-1);
+    printf("Enter starting vertex (0 to %d): ", n - 1);
     scanf("%d", &start);
 
     printf("BFS traversal from vertex %d:\n", start);
